@@ -11,11 +11,10 @@
         
        <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="jquery-1.9.js"></script>
-    </head>
-    <body>
+   <body>
        <div id="fullpage">
             <p>Json Versuch</p>		
-			<button onclick="getData();">getData</button>
+			<input type="button" onclick="bekommen();" value="Bekommen">
             <button onclick="leer();">Leeren Data</button>
             <div id="live_data"></div>
 		</div>
@@ -26,16 +25,27 @@
 function onDeviceReady() {
     // Now safe to use the PhoneGap API
 }
-	function getData() {
-	    alert("getData);
-	    var root = 'https://jsonplaceholder.typicode.com';
-        $.ajax({
-        url: root + '/posts/1',
-        method: 'GET'
-        }).then(function(data) {
-        $('#live_data').html(data);
-        });
-     }
+	function bekommen(){
+		 
+		 
+   $.ajax({
+  url: 'http://ip.jsontest.com/',
+  method: 'GET',
+ dataType:'json',		 
+contentType: "application/json; charset=UTF-8",
+      success: function(response){
+		  
+		    var jsonObj=JSON.stringify(response);
+		  alert(jsonObj);
+		 $('#live_data').html(jsonObj);
+		   
+     
+      },
+	  error: function (request, status, error) {
+       alert(request.responseText);
+	   
+    }
+	 }); }
 	 function leer() {
 	 alert("Leer");
 	 $('#live_data').html("");
